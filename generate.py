@@ -36,12 +36,27 @@ with TemporaryDirectory() as tmpdir:
 
 template = Template("""
 <html lang="en">
+<head>
+<title>Python Docs Translation Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
 <body>
+<h1>Python Docs Translation Dashboard</h1>
 <table>
-<tr><th>language</th><th>completion</th><th>branch</th></tr>
+<thead>
+<tr><th>language</th><th>branch</th><th>completion</th></tr>
+</thead>
+<tbody>
 {% for language, completion, branch in completion_progress | sort(attribute=1) | reverse %}
-<tr><td>{{ language }}</td><td>{{ completion | round(2) }}</td><td>{{ branch }}</td></tr>
+<tr>
+  <td data-label="language">{{ language }}</td>
+  <td data-label="branch">{{ branch }}</td>
+  <td data-label="completion">
+    <div class="progress-bar" style="width: {{ completion | round(2) }}%;">{{ completion | round(2) }}%</div>
+  </td>
+</tr>
 {% endfor %}
+</tbody>
 </table>
 </body>
 </html>
