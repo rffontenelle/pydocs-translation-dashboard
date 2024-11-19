@@ -22,7 +22,7 @@ with TemporaryDirectory() as tmpdir:
         for branch in ('3.13', '3.12', '3.11', '3.10', '3.9'):
             try:
                 Repo.clone_from(f'https://github.com/python/python-docs-{language}.git', clone_path, depth=1, branch=branch)
-            except GitCommandError as e:
+            except GitCommandError:
                 print(f'failed to clone {language} {branch}')
                 continue
             try:
