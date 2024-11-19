@@ -60,7 +60,7 @@ template = Template("""
 {% endfor %}
 </tbody>
 </table>
-<p>Last updated at {{ generation_time.strftime('%x %X %Z') }}.</p>
+<p>Last updated at {{ generation_time.strftime('%A, %d %B %Y, %X %Z') }}.</p>
 </body>
 </html>
 """)
