@@ -5,6 +5,7 @@
 #     "jinja2",
 # ]
 # ///
+from datetime import datetime, timezone
 from pathlib import Path
 from shutil import rmtree
 from tempfile import TemporaryDirectory
@@ -13,6 +14,7 @@ from potodo.potodo import scan_path
 from jinja2 import Template
 
 completion_progress = []
+generation_time = datetime.now(timezone.utc)
 
 with TemporaryDirectory() as tmpdir:
     for language in ('es', 'fr', 'id', 'it', 'ja', 'ko', 'pl', 'pt-br', 'tr', 'uk', 'zh-cn', 'zh-tw'):
@@ -58,11 +60,12 @@ template = Template("""
 {% endfor %}
 </tbody>
 </table>
+<p>Last updated at {{ generation_time.strftime('%x %X %Z') }}.</p>
 </body>
 </html>
 """)
 
-output = template.render(completion_progress=completion_progress)
+output = template.render(completion_progress=completion_progress, generation_time=generation_time)
 
 with open("index.html", "w") as file:
     file.write(output)

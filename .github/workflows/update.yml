@@ -1,0 +1,22 @@
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  push:
+    branches:
+      - '*'
+  workflow_dispatch:
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@main
+      - uses: astral-sh/setup-uv@main
+      - uses: actions/checkout@main
+      - run: uv run generate.py
+      - run: git config --local user.email github-actions@github.com
+      - run: git config --local user.name "GitHub Action's update job"
+      - run: git add .
+      - run: git commit -m 'Update progress values'
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
