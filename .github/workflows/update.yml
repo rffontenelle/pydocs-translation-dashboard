@@ -15,8 +15,8 @@ jobs:
       - uses: astral-sh/setup-uv@main
       - uses: actions/checkout@main
       - run: uv run generate.py
-      - run: git config --local user.email github-actions@github.com
-      - run: git config --local user.name "GitHub Action's update job"
+      - run: git config user.name "github-actions[bot]"
+      - run: git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - run: git add .
       - run: git commit -m 'Update progress values'
       - uses: ad-m/github-push-action@master
