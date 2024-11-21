@@ -43,6 +43,7 @@ with TemporaryDirectory() as clones_dir:
                     hide_reserved=False,
                     api_url='',
                 ).completion
+                print(f"WARNING: Cloned {language} {branch}")
         completion_progress.append((language, completion))
         print(completion_progress[-1])
 
