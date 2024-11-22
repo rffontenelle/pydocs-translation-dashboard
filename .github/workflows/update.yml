@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - 'main'
+  pull_request:
+    branches:
+      - 'main'
   workflow_dispatch:
 jobs:
   update:
@@ -17,7 +20,13 @@ jobs:
       - run: uv run generate.py  # generates "index.html"
       - run: mkdir -p build && cp index.html style.css build
       - name: Deploy 🚀
+        if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: build
           clean: true
+      - if: github.event_name == 'pull_request'
+        run: |
+          curl -Lo index.html-public https://github.com/m-aciek/pydocs-translation-dashboard/raw/refs/heads/gh-pages/
+          diff --color=always -Naur index.html-public index.html
+          cat index.html
