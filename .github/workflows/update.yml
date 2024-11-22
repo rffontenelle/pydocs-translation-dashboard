@@ -25,8 +25,9 @@ jobs:
         with:
           folder: build
           clean: true
-      - if: github.event_name == 'pull_request'
+      - name: Debug index.html if pull request
+        if: github.event_name == 'pull_request'
         run: |
-          curl -Lo index.html-public https://github.com/m-aciek/pydocs-translation-dashboard/raw/refs/heads/gh-pages/
+          curl -Lo index.html-public https://github.com/m-aciek/pydocs-translation-dashboard/raw/refs/heads/gh-pages/index.html
           diff --color=always -Naur index.html-public index.html
           cat index.html
