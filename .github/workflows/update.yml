@@ -29,5 +29,5 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           curl -Lo index.html-public https://github.com/m-aciek/pydocs-translation-dashboard/raw/refs/heads/gh-pages/index.html
-          diff --color=always -Naur index.html-public index.html
+          diff --color=always -u index.html-public index.html || :
           cat index.html
