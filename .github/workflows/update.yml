@@ -29,3 +29,9 @@ jobs:
           curl -Lo index.html-public https://github.com/m-aciek/pydocs-translation-dashboard/raw/refs/heads/gh-pages/index.html
           diff --color=always -u index.html-public index.html || :
           cat index.html
+      - name: Preview page
+        if: github.event_name == 'pull_request'
+        uses: pavi2410/html-preview-action@v4
+        with:
+          html_file: 'index.html'
+          job_summary: true
