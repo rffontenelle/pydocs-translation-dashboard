@@ -65,6 +65,7 @@ template = Template("""
 </tbody>
 </table>
 <p>Last updated at {{ generation_time.strftime('%A, %d %B %Y, %X %Z') }}.</p>
+<p>Note that the completion value is based on files available in language Git repository and <a href="https://github.com/m-aciek/pydocs-translation-dashboard/issues/2" target="_blank">may not include</a> e.g. resources which translation hasn't yet started.</p>
 </body>
 </html>
 """)
